@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Valorandle</title>
-    <link rel="stylesheet" href="./src/style.css">
-  </head>
-  <body>
+<body>
     <div id="app">
-      <h1>Valorandle est en cours de chargement... GOGEMINE</h1>
+      
+      <div id="loading-screen">
+        <h2>Connexion a Discord...</h2>
+      </div>
+
+      <div id="home-screen" class="hidden">
+        <h1 class="title">VALORANDLE</h1>
+        <p class="subtitle">Devine l'agent du jour !</p>
+        <button id="start-btn" class="btn-valorant">COMMENCER LE JEU</button>
+      </div>
     </div>
-    
-    
     
     <script type="module" src="./src/main.js"></script>
   </body>
-</html>

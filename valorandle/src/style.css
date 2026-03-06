@@ -1,0 +1,88 @@
+/* --- Grille --- */
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  gap: 6px;
+}
+
+.tile {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+
+/* --- Style global --- */
+/* --- Style global --- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', sans-serif;
+  color: #ece8e1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  
+  /* --- Le nouveau fond --- */
+  background-color: #0f1923; /* Couleur de secours si l'image charge mal */
+  
+  /* Petite astuce de dev : on met un filtre sombre par-dessus l'image 
+     pour que ton texte blanc reste toujours super lisible ! */
+  background-image: linear-gradient(rgba(15, 25, 35, 0.7), rgba(15, 25, 35, 0.8)), url('../public/Main_menu_bg.png');
+  
+  background-size: cover; /* L'image prend toute la place */
+  background-position: center; /* L'image est centrée */
+  background-repeat: no-repeat; /* L'image ne se répète pas comme une mosaïque */
+}
+
+/* --- Classe utilitaire pour cacher des éléments --- */
+.hidden {
+  display: none !important;
+}
+
+/* --- Typographie --- */
+.title {
+  font-size: 3.5rem;
+  color: #ff4655; /* Le rouge Valorant */
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #8b978f; /* Un gris-vert discret */
+  margin-bottom: 40px;
+}
+
+/* --- Bouton style Valorant --- */
+.btn-valorant {
+  background-color: #ff4655;
+  color: #ece8e1;
+  border: 2px solid #ff4655;
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-valorant:hover {
+  background-color: #ece8e1;
+  color: #ff4655;
+  border: 2px solid #ff4655;
+}

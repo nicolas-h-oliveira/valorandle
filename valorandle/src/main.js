@@ -1,15 +1,27 @@
+import './style.css';
 import { DiscordSDK } from "@discord/embedded-app-sdk";
 
-// On préparera ici l'ID de ton application Discord plus tard
-const discordSdk = new DiscordSDK("1479482492150091971");
+const discordSdk = new DiscordSDK("1479482492150091971"); // Ton Client ID
 
 async function setupDiscordSdk() {
-  // On attend que le SDK soit prêt à fonctionner
+  // 1. On attend que Discord soit prêt
   await discordSdk.ready();
-  console.log("Le SDK Discord est prêt voilà !");
+  console.log("Le SDK Discord est prêt !");
   
-  // On change le texte de notre page pour confirmer
-  document.querySelector('#app').innerHTML = `<h1>Valodle est prêt à être intégré !</h1>`;
+  // 2. On récupère nos éléments HTML
+  const loadingScreen = document.getElementById('loading-screen');
+  const homeScreen = document.getElementById('home-screen');
+  const startBtn = document.getElementById('start-btn');
+  
+  // 3. On cache le chargement et on affiche l'accueil
+  loadingScreen.classList.add('hidden');
+  homeScreen.classList.remove('hidden');
+
+  // 4. On écoute le clic sur le bouton Commencer
+  startBtn.addEventListener('click', () => {
+    console.log("Le joueur a cliqué sur Commencer !");
+    // C'est ici qu'on lancera la page de jeu plus tard !
+  });
 }
 
 // On lance la fonction
