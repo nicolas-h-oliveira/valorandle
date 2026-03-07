@@ -1,92 +1,99 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <!-- C'EST CETTE LIGNE QUI SAUVE TES ACCENTS ET EMOJIS 👇 -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Valorandle</title>
-  </head>
+
+<head>
+  <!-- C'EST CETTE LIGNE QUI SAUVE TES ACCENTS ET EMOJIS 👇 -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valorandle</title>
+</head>
 
 <body>
-    <div id="app">
-      
-      <div id="loading-screen">
-        <h2>Connexion a Discord...</h2>
+  <div id="app">
+
+    <div id="loading-screen">
+      <h2>Connexion a Discord...</h2>
+    </div>
+
+    <div id="home-screen" class="hidden">
+      <h1 class="title">VALORANDLE</h1>
+      <p class="subtitle">Devine l'agent du jour !</p>
+      <button id="start-btn" class="btn-valorant">DEVINE L'AGENT</button>
+      <br><br>
+      <button id="start-ability-btn" class="btn-valorant">DEVINE L'ABILITE</button>
+    </div>
+
+
+    <!-- PAGE AGENTS -->
+
+    <div id="game-container" class="hidden">
+
+      <div class="title-card">
+        <h1>DEVINEZ L'AGENT VALORANT DU JOUR !</h1>
+        <div class="title-line"></div>
+        <p>Tapez le nom de n'importe quel agent pour commencer.</p>
       </div>
 
-      <div id="home-screen" class="hidden">
-        <h1 class="title">VALORANDLE</h1>
-        <p class="subtitle">Devine l'agent du jour !</p>
-        <button id="start-btn" class="btn-valorant">DEVINE L'AGENT</button>
-        <br><br>
-        <button id="start-ability-btn" class="btn-valorant">DEVINE L'ABILITE</button>
+      <div class="search-container">
+        <input id="guessInput" placeholder="Tapez le nom de l'agent..." />
+        <button id="submitGuess">▼</button>
       </div>
 
+      <div class="guess-table">
 
-      <!-- PAGE AGENTS -->
-
-      <div id="game-container" class="hidden">
-
-        <div class="title-card">
-          <h1>DEVINEZ L'AGENT VALORANT DU JOUR !</h1>
-            <div class="title-line"></div>
-            <p>Tapez le nom de n'importe quel agent pour commencer.</p>
+        <div class="table-header">
+          <div>Agent</div>
+          <div>Genre</div>
+          <div>Role</div>
+          <div>Origine</div>
+          <div>Annee de sortie</div>
         </div>
 
-          <div class="search-container">
-          <input id="guessInput" placeholder="Tapez le nom de l'agent..." />
-          <button id="submitGuess">▼</button>
-        </div>
-
-        <div class="guess-table">
-
-          <div class="table-header">
-            <div>Agent</div>
-            <div>Genre</div>
-            <div>Role</div>
-            <div>Origine</div>
-            <div>Annee de sortie</div>
-          </div>
-
-          <div id="guessRows"></div>
-
-        </div>
-        <button id="back-to-menu-btn-agent" class="btn-valorant">RETOUR</button>
+        <div id="guessRows"></div>
 
       </div>
+      <button id="back-to-menu-btn-agent" class="btn-valorant">RETOUR</button>
 
-  <!-- PAGE ABILITE -->
+    </div>
+
+    <!-- PAGE ABILITE -->
 
     <div id="ability-game-screen" class="hidden">
-        
-        <!-- Le bouton retour reste tout en haut à gauche -->
-        <button id="back-to-menu-btn-ability" class="btn-valorant">RETOUR</button>
 
-        <!-- Notre nouveau conteneur Flexbox pour couper l'écran en deux -->
-        <div class="ability-layout">
-          
-          <!-- GAUCHE : L'image et la grille -->
-          <div class="ability-left">
-            <div id="ability-container">
-              <img id="ability-image" src="" alt="Compétence mystère">
-              <div id="grid-overlay"></div>
-            </div>
+      <!-- Le bouton retour reste tout en haut à gauche -->
+      <button id="back-to-menu-btn-ability" class="btn-valorant">RETOUR</button>
+
+      <!-- Notre nouveau conteneur Flexbox pour couper l'écran en deux -->
+      <div class="ability-layout">
+
+        <!-- GAUCHE : L'image et la grille -->
+        <div class="ability-left">
+          <div id="ability-container">
+            <img id="ability-image" src="" alt="Compétence mystère">
+            <div id="grid-overlay"></div>
           </div>
-
-          <!-- DROITE : Les textes et les boutons -->
-          <div class="ability-right">
-            <h2 class="title" style="font-size: 2.5rem;">Devine l'abilité</h2>
-            <p class="subtitle">À quel agent appartient cette compétence ?</p>
-            
-            <!-- On prépare le terrain pour la barre de recherche -->
-            <div class="search-container" style="justify-content: center;">
-              <input type="text" id="ability-guess-input" placeholder="Nom de l'agent..." />
-              <button id="wrong-guess-btn" class="btn-valorant" style="padding: 15px;">TESTER</button>
-            </div>
-          </div>
-
         </div>
+
+        <!-- DROITE : Les textes et les boutons -->
+        <div class="ability-right">
+          <h2 class="title" style="font-size: 2.5rem;">Devine l'abilité</h2>
+          <p class="subtitle">À quel agent appartient cette compétence ?</p>
+
+          <div class="search-container" style="justify-content: center; gap: 10px;">
+
+            <div class="search-wrapper" style="position: relative;">
+              <input type="text" id="ability-guess-input" placeholder="Nom de l'agent..." autocomplete="off"
+                style="padding: 15px; font-size: 16px; background: #1e1e1e; border: none; color: white; width: 250px;" />
+
+              <div id="suggestions-container" class="suggestions-dropdown hidden"></div>
+            </div>
+
+            <button id="wrong-guess-btn" class="btn-valorant" style="padding: 15px;">VALIDER</button>
+          </div>
+        </div>
+
+      </div>
     </div>
-    
+
     <script type="module" src="./src/main.js"></script>
-  </body>
+</body>

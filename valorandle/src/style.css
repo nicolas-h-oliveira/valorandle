@@ -249,3 +249,42 @@ body {
   align-items: flex-start; /* Aligne le texte à gauche de sa zone */
   text-align: left;
 }
+
+/* --- Suggestions de recherche --- */
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%; /* Se colle juste en dessous de l'input */
+  left: 0;
+  width: 100%;
+  background-color: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  max-height: 200px;
+  overflow-y: auto; /* Ajoute une barre de défilement si trop d'agents */
+  z-index: 100;
+  text-align: left;
+}
+
+.suggestion-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #333;
+  transition: background-color 0.1s;
+}
+
+.suggestion-item:hover {
+  background-color: #ff4655;
+  color: #ece8e1;
+}
+
+/* L'icône de l'agent dans la suggestion */
+.suggestion-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #0f1923; /* Couleur de fond si pas d'image */
+  object-fit: cover;
+  border: 1px solid #ece8e1;
+}
