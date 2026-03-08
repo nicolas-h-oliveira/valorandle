@@ -1,198 +1,317 @@
-/* --- Grille --- */
-.grid {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: center;
+:root {
+  --bg: #0f1923;
+  --text: #ece8e1;
+  --muted: #8b978f;
+  --accent: #ff4655;
+  --panel: rgba(20, 20, 20, 0.85);
+  --border: rgba(255, 255, 255, 0.25);
+  --success: rgba(31, 143, 89, 0.45);
+  --warning: rgba(179, 139, 22, 0.45);
+  --danger: rgba(154, 47, 47, 0.45);
 }
 
-.row {
-  display: flex;
-  gap: 6px;
+* {
+  box-sizing: border-box;
 }
 
-.tile {
-  width: 50px;
-  height: 50px;
-  border: 2px solid #555;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-/* --- Style global --- */
 body {
   margin: 0;
-  padding: 0;
+  min-height: 100vh;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', sans-serif;
-  color: #ece8e1;
+  color: var(--text);
+  background-color: var(--bg);
+  background-image: linear-gradient(rgba(15, 25, 35, 0.7), rgba(15, 25, 35, 0.82)), url('/Main_menu_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+#app {
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  text-align: center;
-  
-  /* --- Le nouveau fond --- */
-  background-color: #0f1923; /* Couleur de secours si l'image charge mal */
-  
-  /* on met un filtre sombre par-dessus l'image 
-     pour que ton texte blanc reste toujours super lisible ! */
-  background-image: linear-gradient(rgba(15, 25, 35, 0.7), rgba(15, 25, 35, 0.8)), url('../public/Main_menu_bg.png');
-  
-  background-size: cover; /* L'image prend toute la place */
-  background-position: center; /* L'image est centrée */
-  background-repeat: no-repeat; /* L'image ne se répète pas comme une mosaïque */
+  padding: 24px;
 }
 
-/* --- Classe utilitaire pour cacher des éléments --- */
+#loading-screen,
+#home-screen,
+#agent-game-screen,
+#ability-game-screen {
+  width: min(1080px, 100%);
+}
+
 .hidden {
   display: none !important;
 }
 
-/* --- Typographie --- */
 .title {
   font-size: 3.5rem;
-  color: #ff4655; /* Le rouge Valorant */
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 4px;
-  margin-bottom: 5px;
+  margin: 0 0 10px;
 }
 
 .subtitle {
-  font-size: 1.2rem;
-  color: #8b978f; /* Un gris-vert discret */
-  margin-bottom: 40px;
+  font-size: 1.1rem;
+  color: var(--muted);
+  margin-bottom: 30px;
 }
 
-/* --- Bouton style Valorant --- */
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
 .btn-valorant {
-  background-color: #ff4655;
-  color: #ece8e1;
-  border: 2px solid #ff4655;
-  padding: 15px 40px;
-  font-size: 1.2rem;
+  background-color: var(--accent);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  padding: 14px 24px;
+  font-size: 1.05rem;
   font-weight: bold;
   cursor: pointer;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   transition: all 0.2s ease-in-out;
 }
 
 .btn-valorant:hover {
-  background-color: #ece8e1;
-  color: #ff4655;
-  border: 2px solid #ff4655;
+  background-color: var(--text);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
-/* --- agents --- */
-#game-container{
-  width:900px;
-  margin:auto;
-  padding-top:80px;
+.game-screen {
+  position: relative;
 }
 
-.title-card{
-  background:rgba(20,20,20,0.85);
-  border:2px solid rgba(255,255,255,0.3);
-  border-radius:10px;
-  padding:40px;
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 20;
+  padding: 10px 18px;
+  font-size: 1rem;
 }
 
-.title-card h1{
-  font-size:40px;
-  margin:0;
+#agent-game-screen {
+  padding-top: 72px;
 }
 
-.title-line{
-  width:120px;
-  height:5px;
-  background:#ff4655;
-  margin:15px 0;
+.title-card {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 30px;
 }
 
-.search-container{
-  display:flex;
-  margin-top:30px;
+.title-card h1 {
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  margin: 0;
 }
 
-#guessInput{
-  flex:1;
-  padding:15px;
-  font-size:16px;
-  background:#1e1e1e;
-  border:none;
-  color:white;
+.title-line {
+  width: 120px;
+  height: 4px;
+  background: var(--accent);
+  margin: 15px auto;
 }
 
-#submitGuess{
-  width:60px;
-  background:#444;
-  border:none;
-  color:white;
-  font-size:18px;
+.search-container {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 24px;
 }
 
-.guess-table{
-  margin-top:40px;
+.search-wrapper {
+  position: relative;
+  flex: 1;
 }
 
-.table-header{
-  display:grid;
-  grid-template-columns: repeat(6,1fr);
-  border-bottom:2px solid white;
-  padding-bottom:10px;
-  font-weight:bold;
+#agent-guess-input,
+#ability-guess-input {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  outline: none;
 }
 
-.guess-row{
-  display:grid;
-  grid-template-columns: repeat(6,1fr);
-  padding:15px 0;
-  border-bottom:1px solid rgba(255,255,255,0.2);
+#agent-guess-input:focus,
+#ability-guess-input:focus {
+  border-color: var(--accent);
 }
 
-.guess-cell{
-  text-align:center;
+#agent-submit-guess {
+  width: 64px;
+  border: none;
+  background: #2d3640;
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
 }
 
-.correct{
-  background:#2ecc71;
+#agent-submit-guess:hover {
+  background: #3b4653;
 }
 
-.wrong{
-  background:#e74c3c;
+#wrong-guess-btn {
+  font-size: 1rem;
+  letter-spacing: 1px;
 }
 
-.close{
-  background:#f1c40f;
+.feedback-message {
+  margin: 16px 0 0;
+  min-height: 24px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.06);
 }
 
-/* =========================================
-   --- JEU DE L'ABILITÉ ---
-========================================= */
-
-/* --- Placer le bouton retour en haut à gauche --- */
-#back-to-menu-btn-ability {
-  position: absolute; /* Détache le bouton du centrage global */
-  top: 20px;          /* Espace depuis le haut de l'écran */
-  left: 20px;         /* Espace depuis la gauche de l'écran */
-  margin: 0;          /* Enlève les marges par défaut */
-  z-index: 10;        /* S'assure qu'il reste toujours au premier plan */
+.feedback-message.info {
+  background: rgba(255, 255, 255, 0.08);
 }
 
-/* --- Le conteneur de l'image et de la grille --- */
+.feedback-message.success {
+  background: rgba(23, 128, 77, 0.45);
+}
+
+.feedback-message.warning {
+  background: rgba(175, 133, 20, 0.45);
+}
+
+.feedback-message.error {
+  background: rgba(146, 35, 35, 0.45);
+}
+
+.guess-table {
+  margin-top: 22px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table-header,
+.guess-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.table-header {
+  background: rgba(255, 255, 255, 0.08);
+  font-weight: bold;
+}
+
+.table-header div,
+.guess-cell {
+  padding: 12px 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guess-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Image dans la première cellule */
+.guess-agent-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* Animation des cellules texte */
+.cell-reveal {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.cell-hidden {
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+}
+
+.cell-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.correct {
+  background: var(--success);
+}
+
+.wrong {
+  background: var(--danger);
+}
+
+.close {
+  background: var(--warning);
+}
+
+#ability-game-screen {
+  padding-top: 72px;
+}
+
+.ability-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  min-height: calc(100vh - 120px);
+}
+
+.ability-left,
+.ability-right {
+  flex: 1;
+}
+
+.ability-left {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ability-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.ability-title {
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  margin-bottom: 6px;
+}
+
+.ability-search {
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 460px;
+}
+
 #ability-container {
-  position: relative; /* Indispensable pour superposer la grille ! */
-  width: 300px;
-  height: 300px;
-  margin: 0 auto;
-  border: 4px solid #ece8e1;
+  position: relative;
+  width: 320px;
+  height: 320px;
+  border: 4px solid var(--text);
   border-radius: 8px;
   overflow: hidden;
 }
 
-/* --- L'image en arrière-plan --- */
 #ability-image {
   width: 100%;
   height: 100%;
@@ -200,91 +319,214 @@ body {
   display: block;
 }
 
-/* --- La grille qui se superpose --- */
 #grid-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
 }
 
-/* --- Les 16 carrés noirs --- */
 .grid-square {
-  background-color: #0f1923;
+  background-color: var(--bg);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: opacity 0.3s ease;
 }
 
-/* --- La classe pour rendre un carré invisible --- */
 .revealed {
   opacity: 0;
 }
 
-/* --- Mise en page Gauche/Droite --- */
-.ability-layout {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 60px; /* L'espace entre l'image et la zone de texte */
-  height: 100vh;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.ability-left {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end; /* Pousse l'image un peu vers le centre */
-}
-
-.ability-right {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Aligne le texte à gauche de sa zone */
-  text-align: left;
-}
-
-/* --- Suggestions de recherche --- */
 .suggestions-dropdown {
   position: absolute;
-  top: 100%; /* Se colle juste en dessous de l'input */
+  top: calc(100% + 6px);
   left: 0;
-  width: 100%;
+  right: 0;
   background-color: #1e1e1e;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  max-height: 200px;
-  overflow-y: auto; /* Ajoute une barre de défilement si trop d'agents */
+  max-height: 220px;
+  overflow-y: auto;
   z-index: 100;
   text-align: left;
 }
 
 .suggestion-item {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text);
   padding: 10px 15px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   border-bottom: 1px solid #333;
-  transition: background-color 0.1s;
 }
 
 .suggestion-item:hover {
-  background-color: #ff4655;
-  color: #ece8e1;
+  background-color: var(--accent);
 }
 
-/* L'icône de l'agent dans la suggestion */
 .suggestion-icon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #0f1923; /* Couleur de fond si pas d'image */
+  background-color: var(--bg);
   object-fit: cover;
-  border: 1px solid #ece8e1;
+  border: 1px solid var(--text);
+}
+
+.toast {
+  position: fixed;
+  top: 30px;
+  right: -460px;
+  background-color: #2ecc71;
+  color: #0f1923;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  font-size: 1.05rem;
+  font-weight: bold;
+  z-index: 1000;
+  transition: right 0.35s ease;
+}
+
+.toast.show {
+  right: 30px;
+}
+
+@keyframes blink-red-shadow {
+  0%,
+  100% {
+    box-shadow: none;
+  }
+
+  50% {
+    box-shadow: 0 0 10px 2px var(--accent);
+  }
+}
+
+.input-error {
+  animation: blink-red-shadow 0.3s ease-in-out 2;
+  border: 1px solid var(--accent) !important;
+}
+
+@media (max-width: 720px) {
+  #app {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 2.3rem;
+  }
+
+  .subtitle {
+    margin-bottom: 22px;
+  }
+
+  .back-btn {
+    top: 12px;
+    left: 12px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+
+  #agent-game-screen,
+  #ability-game-screen {
+    padding-top: 64px;
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  #agent-submit-guess,
+  #wrong-guess-btn {
+    width: 100%;
+    height: 48px;
+  }
+
+  .table-header div,
+  .guess-cell {
+    padding: 10px 6px;
+    font-size: 0.8rem;
+  }
+
+  #ability-container {
+    width: min(320px, 84vw);
+    height: min(320px, 84vw);
+  }
+
+  .toast {
+    max-width: calc(100vw - 24px);
+    right: -100vw;
+    font-size: 0.95rem;
+  }
+
+  .toast.show {
+    right: 12px;
+  }
+}
+
+/* =========================================
+   --- HISTORIQUE JEU ABILITÉ ---
+========================================= */
+.guess-history-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+  width: 100%;
+  max-width: 460px;
+}
+
+.history-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
+  padding: 2px;
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+/* L'agent est faux */
+.history-wrong {
+  border-color: var(--accent); /* Le rouge Valorant */
+  background-color: rgba(255, 70, 85, 0.15); 
+  opacity: 0.6; /* On l'assombrit un peu car il est éliminé */
+}
+
+/* L'agent est le bon */
+.history-correct {
+  border-color: #2ecc71; /* Vert de victoire */
+  background-color: rgba(46, 204, 113, 0.2);
+  box-shadow: 0 0 15px rgba(46, 204, 113, 0.4); /* Petit halo lumineux */
+}
+
+/* =========================================
+   --- CRÉDITS DU MENU PRINCIPAL ---
+========================================= */
+.credits-footer {
+  position: fixed;        
+  bottom: 20px;           
+  left: 30px;             
+  right: 30px;            
+  display: flex;          
+  justify-content: space-between; 
+  align-items: center;
+  
+  font-size: 0.65rem;     /* Au lieu de 0.9rem (ça correspond à environ 10px) */
+  letter-spacing: 1px;    /* On resserre un peu les lettres */
+  
+  color: rgba(236, 232, 225, 0.4); /* Encore un peu plus transparent */
+  text-transform: uppercase;
+  font-weight: bold;
+  pointer-events: none;   
+}
+
+.team-name {
+  color: var(--accent); 
+  opacity: 0.7;
 }
